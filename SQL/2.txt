@@ -1,0 +1,475 @@
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.32 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| ai                 |
+| ai_martians        |
+| hostel             |
+| information_schema |
+| ip_university      |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| wd_12              |
+| wd_7pm             |
+| we_3               |
+| weeke3             |
+| weekend12          |
+| wkproject          |
+| world              |
++--------------------+
+16 rows in set (0.04 sec)
+
+mysql> use wd_12;
+Database changed
+mysql> show tables;
++-----------------+
+| Tables_in_wd_12 |
++-----------------+
+| student         |
++-----------------+
+1 row in set (0.01 sec)
+
+mysql> select * from student;
++------+------+--------+--------+
+| roll | name | branch | fee    |
++------+------+--------+--------+
+|    1 | a    | BCA    |  10000 |
+|    2 | b    | CA     |  13232 |
+|    3 | c    | MCA    |  13239 |
+|    4 | d    | B. Sc  |  13229 |
+|    5 | e    | Btech  |  12229 |
+|    6 | f    | DBA    |  22229 |
+|    7 | g    | MBA    |  23229 |
+|    8 | h    | CA     | 234329 |
++------+------+--------+--------+
+8 rows in set (0.03 sec)
+
+mysql> select * from student limit 2;
++------+------+--------+-------+
+| roll | name | branch | fee   |
++------+------+--------+-------+
+|    1 | a    | BCA    | 10000 |
+|    2 | b    | CA     | 13232 |
++------+------+--------+-------+
+2 rows in set (0.00 sec)
+
+mysql> select * from student limit 1,2;
++------+------+--------+-------+
+| roll | name | branch | fee   |
++------+------+--------+-------+
+|    2 | b    | CA     | 13232 |
+|    3 | c    | MCA    | 13239 |
++------+------+--------+-------+
+2 rows in set (0.00 sec)
+
+mysql> insert into student values(10,"monu","CS",324324),(11,"sonu","MCA",5435454);
+Query OK, 2 rows affected (0.01 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> select * from student;
++------+------+--------+---------+
+| roll | name | branch | fee     |
++------+------+--------+---------+
+|    1 | a    | BCA    |   10000 |
+|    2 | b    | CA     |   13232 |
+|    3 | c    | MCA    |   13239 |
+|    4 | d    | B. Sc  |   13229 |
+|    5 | e    | Btech  |   12229 |
+|    6 | f    | DBA    |   22229 |
+|    7 | g    | MBA    |   23229 |
+|    8 | h    | CA     |  234329 |
+|   10 | monu | CS     |  324324 |
+|   11 | sonu | MCA    | 5435450 |
++------+------+--------+---------+
+10 rows in set (0.00 sec)
+
+mysql> select * from student where branch like "C%";
++------+------+--------+--------+
+| roll | name | branch | fee    |
++------+------+--------+--------+
+|    2 | b    | CA     |  13232 |
+|    8 | h    | CA     | 234329 |
+|   10 | monu | CS     | 324324 |
++------+------+--------+--------+
+3 rows in set (0.00 sec)
+
+mysql> select * from student where name like "%n";
+Empty set (0.00 sec)
+
+mysql> select * from student where name like "%u";
++------+------+--------+---------+
+| roll | name | branch | fee     |
++------+------+--------+---------+
+|   10 | monu | CS     |  324324 |
+|   11 | sonu | MCA    | 5435450 |
++------+------+--------+---------+
+2 rows in set (0.00 sec)
+
+mysql> select * from student where name like "___u";
++------+------+--------+---------+
+| roll | name | branch | fee     |
++------+------+--------+---------+
+|   10 | monu | CS     |  324324 |
+|   11 | sonu | MCA    | 5435450 |
++------+------+--------+---------+
+2 rows in set (0.00 sec)
+
+mysql> select * from student where name like "__u";
+Empty set (0.00 sec)
+
+mysql> select * from student where name like "_o%"
+    -> ;
++------+------+--------+---------+
+| roll | name | branch | fee     |
++------+------+--------+---------+
+|   10 | monu | CS     |  324324 |
+|   11 | sonu | MCA    | 5435450 |
++------+------+--------+---------+
+2 rows in set (0.00 sec)
+
+mysql> select * from student where name like "%n%"
+    -> ;
++------+------+--------+---------+
+| roll | name | branch | fee     |
++------+------+--------+---------+
+|   10 | monu | CS     |  324324 |
+|   11 | sonu | MCA    | 5435450 |
++------+------+--------+---------+
+2 rows in set (0.00 sec)
+
+mysql> select * from student;
++------+------+--------+---------+
+| roll | name | branch | fee     |
++------+------+--------+---------+
+|    1 | a    | BCA    |   10000 |
+|    2 | b    | CA     |   13232 |
+|    3 | c    | MCA    |   13239 |
+|    4 | d    | B. Sc  |   13229 |
+|    5 | e    | Btech  |   12229 |
+|    6 | f    | DBA    |   22229 |
+|    7 | g    | MBA    |   23229 |
+|    8 | h    | CA     |  234329 |
+|   10 | monu | CS     |  324324 |
+|   11 | sonu | MCA    | 5435450 |
++------+------+--------+---------+
+10 rows in set (0.00 sec)
+
+mysql> select min(fee) from student;
++----------+
+| min(fee) |
++----------+
+|    10000 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select * from student;
++------+------+--------+---------+
+| roll | name | branch | fee     |
++------+------+--------+---------+
+|    1 | a    | BCA    |   10000 |
+|    2 | b    | CA     |   13232 |
+|    3 | c    | MCA    |   13239 |
+|    4 | d    | B. Sc  |   13229 |
+|    5 | e    | Btech  |   12229 |
+|    6 | f    | DBA    |   22229 |
+|    7 | g    | MBA    |   23229 |
+|    8 | h    | CA     |  234329 |
+|   10 | monu | CS     |  324324 |
+|   11 | sonu | MCA    | 5435450 |
++------+------+--------+---------+
+10 rows in set (0.00 sec)
+
+mysql> select * from student where fee in (select min(fee) from student);
++------+------+--------+-------+
+| roll | name | branch | fee   |
++------+------+--------+-------+
+|    1 | a    | BCA    | 10000 |
++------+------+--------+-------+
+1 row in set (0.01 sec)
+
+mysql> select * froms student where fee in 10000;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'froms student where fee in 10000' at line 1
+mysql> desc student;
++--------+--------------+------+-----+---------+-------+
+| Field  | Type         | Null | Key | Default | Extra |
++--------+--------------+------+-----+---------+-------+
+| roll   | int          | NO   | PRI | NULL    |       |
+| name   | varchar(100) | YES  |     | NULL    |       |
+| branch | varchar(100) | YES  |     | NULL    |       |
+| fee    | float        | YES  |     | NULL    |       |
++--------+--------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+mysql> select * from student where name in "b";
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '"b"' at line 1
+mysql> select * from student where name in b;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'b' at line 1
+mysql> select * from student where roll in 1;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1' at line 1
+mysql> select * from student where fee in between (9999 and 10001);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'between (9999 and 10001)' at line 1
+mysql> select * from student where fee in between 9999 and 10001;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'between 9999 and 10001' at line 1
+mysql> select * from student where fee between 9999 and 10001;
++------+------+--------+-------+
+| roll | name | branch | fee   |
++------+------+--------+-------+
+|    1 | a    | BCA    | 10000 |
++------+------+--------+-------+
+1 row in set (0.00 sec)
+
+mysql> select * from student where name in ("a");
++------+------+--------+-------+
+| roll | name | branch | fee   |
++------+------+--------+-------+
+|    1 | a    | BCA    | 10000 |
++------+------+--------+-------+
+1 row in set (0.00 sec)
+
+mysql> select * from student;
++------+------+--------+---------+
+| roll | name | branch | fee     |
++------+------+--------+---------+
+|    1 | a    | BCA    |   10000 |
+|    2 | b    | CA     |   13232 |
+|    3 | c    | MCA    |   13239 |
+|    4 | d    | B. Sc  |   13229 |
+|    5 | e    | Btech  |   12229 |
+|    6 | f    | DBA    |   22229 |
+|    7 | g    | MBA    |   23229 |
+|    8 | h    | CA     |  234329 |
+|   10 | monu | CS     |  324324 |
+|   11 | sonu | MCA    | 5435450 |
++------+------+--------+---------+
+10 rows in set (0.00 sec)
+
+mysql> select name from student where roll=1;
++------+
+| name |
++------+
+| a    |
++------+
+1 row in set (0.00 sec)
+
+mysql> select * from student where name in (select name from student where roll=1);
++------+------+--------+-------+
+| roll | name | branch | fee   |
++------+------+--------+-------+
+|    1 | a    | BCA    | 10000 |
++------+------+--------+-------+
+1 row in set (0.00 sec)
+
+mysql> select * froms student;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'froms student' at line 1
+mysql> select * from student;
++------+------+--------+---------+
+| roll | name | branch | fee     |
++------+------+--------+---------+
+|    1 | a    | BCA    |   10000 |
+|    2 | b    | CA     |   13232 |
+|    3 | c    | MCA    |   13239 |
+|    4 | d    | B. Sc  |   13229 |
+|    5 | e    | Btech  |   12229 |
+|    6 | f    | DBA    |   22229 |
+|    7 | g    | MBA    |   23229 |
+|    8 | h    | CA     |  234329 |
+|   10 | monu | CS     |  324324 |
+|   11 | sonu | MCA    | 5435450 |
++------+------+--------+---------+
+10 rows in set (0.00 sec)
+
+mysql> select name from student where roll=1;
++------+
+| name |
++------+
+| a    |
++------+
+1 row in set (0.00 sec)
+
+mysql> select * from student where roll=1;
++------+------+--------+-------+
+| roll | name | branch | fee   |
++------+------+--------+-------+
+|    1 | a    | BCA    | 10000 |
++------+------+--------+-------+
+1 row in set (0.00 sec)
+
+mysql> select * from student where roll between 3 and 7;
++------+------+--------+-------+
+| roll | name | branch | fee   |
++------+------+--------+-------+
+|    3 | c    | MCA    | 13239 |
+|    4 | d    | B. Sc  | 13229 |
+|    5 | e    | Btech  | 12229 |
+|    6 | f    | DBA    | 22229 |
+|    7 | g    | MBA    | 23229 |
++------+------+--------+-------+
+5 rows in set (0.00 sec)
+
+mysql> select * from student where roll between 3 or 7;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'or 7' at line 1
+mysql> select * from student;
++------+------+--------+---------+
+| roll | name | branch | fee     |
++------+------+--------+---------+
+|    1 | a    | BCA    |   10000 |
+|    2 | b    | CA     |   13232 |
+|    3 | c    | MCA    |   13239 |
+|    4 | d    | B. Sc  |   13229 |
+|    5 | e    | Btech  |   12229 |
+|    6 | f    | DBA    |   22229 |
+|    7 | g    | MBA    |   23229 |
+|    8 | h    | CA     |  234329 |
+|   10 | monu | CS     |  324324 |
+|   11 | sonu | MCA    | 5435450 |
++------+------+--------+---------+
+10 rows in set (0.00 sec)
+
+mysql> create table hostel(sn int primary,room_no int);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',room_no int)' at line 1
+mysql> create table hostel(sn int primary key,room_no int);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> insert into hostel values(1,202),(5,302),(4,202);
+Query OK, 3 rows affected (0.00 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from hostel;
++----+---------+
+| sn | room_no |
++----+---------+
+|  1 |     202 |
+|  4 |     202 |
+|  5 |     302 |
++----+---------+
+3 rows in set (0.00 sec)
+
+mysql> --inner join
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '--inner join' at line 1
+mysql> -- inner join
+mysql> select * from student inner join hostel on student.roll=hostel.sn;
++------+------+--------+-------+----+---------+
+| roll | name | branch | fee   | sn | room_no |
++------+------+--------+-------+----+---------+
+|    1 | a    | BCA    | 10000 |  1 |     202 |
+|    4 | d    | B. Sc  | 13229 |  4 |     202 |
+|    5 | e    | Btech  | 12229 |  5 |     302 |
++------+------+--------+-------+----+---------+
+3 rows in set (0.00 sec)
+
+mysql> select student.roll,student.name,student.branch,hostel.room_no from student inner join hostel on student.roll=hostel.sn;
++------+------+--------+---------+
+| roll | name | branch | room_no |
++------+------+--------+---------+
+|    1 | a    | BCA    |     202 |
+|    4 | d    | B. Sc  |     202 |
+|    5 | e    | Btech  |     302 |
++------+------+--------+---------+
+3 rows in set (0.00 sec)
+
+mysql> select s.roll,s.name,s.branch,h.room_no from student as s inner join hostel as h on s.roll=h.sn;
++------+------+--------+---------+
+| roll | name | branch | room_no |
++------+------+--------+---------+
+|    1 | a    | BCA    |     202 |
+|    4 | d    | B. Sc  |     202 |
+|    5 | e    | Btech  |     302 |
++------+------+--------+---------+
+3 rows in set (0.00 sec)
+
+mysql> -- Left join
+mysql> select s.roll,s.name,s.branch,h.room_no from student as s left join hostel as h on s.roll=h.sn;
++------+------+--------+---------+
+| roll | name | branch | room_no |
++------+------+--------+---------+
+|    1 | a    | BCA    |     202 |
+|    2 | b    | CA     |    NULL |
+|    3 | c    | MCA    |    NULL |
+|    4 | d    | B. Sc  |     202 |
+|    5 | e    | Btech  |     302 |
+|    6 | f    | DBA    |    NULL |
+|    7 | g    | MBA    |    NULL |
+|    8 | h    | CA     |    NULL |
+|   10 | monu | CS     |    NULL |
+|   11 | sonu | MCA    |    NULL |
++------+------+--------+---------+
+10 rows in set (0.00 sec)
+
+mysql> insert into hostel values(20,303);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select s.roll,s.name,s.branch,h.room_no from student as s left join hostel as h on s.roll=h.sn;
++------+------+--------+---------+
+| roll | name | branch | room_no |
++------+------+--------+---------+
+|    1 | a    | BCA    |     202 |
+|    2 | b    | CA     |    NULL |
+|    3 | c    | MCA    |    NULL |
+|    4 | d    | B. Sc  |     202 |
+|    5 | e    | Btech  |     302 |
+|    6 | f    | DBA    |    NULL |
+|    7 | g    | MBA    |    NULL |
+|    8 | h    | CA     |    NULL |
+|   10 | monu | CS     |    NULL |
+|   11 | sonu | MCA    |    NULL |
++------+------+--------+---------+
+10 rows in set (0.00 sec)
+
+mysql> select s.roll,s.name,s.branch,h.room_no from student as s right join hostel as h on s.roll=h.sn;
++------+------+--------+---------+
+| roll | name | branch | room_no |
++------+------+--------+---------+
+|    1 | a    | BCA    |     202 |
+|    4 | d    | B. Sc  |     202 |
+|    5 | e    | Btech  |     302 |
+| NULL | NULL | NULL   |     303 |
++------+------+--------+---------+
+4 rows in set (0.00 sec)
+
+mysql> select h.room_no,s.roll,s.name,s.branch from student as s right join hostel as h on s.roll=h.sn;
++---------+------+------+--------+
+| room_no | roll | name | branch |
++---------+------+------+--------+
+|     202 |    1 | a    | BCA    |
+|     202 |    4 | d    | B. Sc  |
+|     302 |    5 | e    | Btech  |
+|     303 | NULL | NULL | NULL   |
++---------+------+------+--------+
+4 rows in set (0.00 sec)
+
+mysql> select s.roll,s.name,s.branch,h.room_no from student as s right join hostel as h on s.roll=h.sn union select s.roll,s.name,s.branch,h.room_no from student as s left join hostel as h on s.roll= h.sn;
++------+------+--------+---------+
+| roll | name | branch | room_no |
++------+------+--------+---------+
+|    1 | a    | BCA    |     202 |
+|    4 | d    | B. Sc  |     202 |
+|    5 | e    | Btech  |     302 |
+| NULL | NULL | NULL   |     303 |
+|    2 | b    | CA     |    NULL |
+|    3 | c    | MCA    |    NULL |
+|    6 | f    | DBA    |    NULL |
+|    7 | g    | MBA    |    NULL |
+|    8 | h    | CA     |    NULL |
+|   10 | monu | CS     |    NULL |
+|   11 | sonu | MCA    |    NULL |
++------+------+--------+---------+
+11 rows in set (0.00 sec)
+
+mysql>
+
